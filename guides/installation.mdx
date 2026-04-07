@@ -1,0 +1,59 @@
+---
+title: "Installation"
+description: "Detailed installation instructions for all Stress Pilot components."
+---
+
+Stress Pilot consists of multiple components that can be installed independently or as a suite.
+
+## Core Backend (Java)
+
+The core backend requires JDK 17+.
+
+1. Navigate to the `stresspilot` directory.
+2. Build the project using Maven:
+   ```bash
+   ./mvnw clean install
+   ```
+3. Run the application:
+   ```bash
+   java -jar target/stresspilot-0.0.1-SNAPSHOT.jar
+   ```
+
+## Plugin Service (Rust)
+
+The plugin service requires Rust 2024 edition.
+
+1. Navigate to the `plugin_service` directory.
+2. Copy the `.env.example` to `.env` and configure your database and S3 settings.
+3. Run the service:
+   ```bash
+   cargo run
+   ```
+
+## Super App (Flutter)
+
+1. Ensure Flutter is installed: `flutter doctor`.
+2. Navigate to `stresspilot_super_app`.
+3. Fetch dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Run for your preferred platform (Windows, macOS, Linux, or Web):
+   ```bash
+   flutter run -d windows
+   ```
+
+## AI Agent (Python)
+
+1. Navigate to `stresspilot_agent`.
+2. Create a virtual environment and install dependencies:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate # or .venv\Scripts\activate on Windows
+   pip install -r requirements.txt
+   ```
+3. Configure your LLM API keys in the `.env` file.
+4. Run the agent:
+   ```bash
+   python src/main.py
+   ```

@@ -1,0 +1,45 @@
+---
+title: "JavaScript Plugin Example"
+description: "How to use the JavaScript plugin in Stress Pilot."
+---
+
+The JavaScript plugin provides a flexible way to execute custom logic during your test runs.
+
+## When to use it
+
+- To transform response data from one step before passing it to the next.
+- To perform complex assertions that aren't possible with standard validators.
+- To simulate custom delays or conditional logic within a flow.
+
+## Example Code Snippet
+
+When defining a JavaScript endpoint, you can provide a script like this:
+
+```javascript
+// Example JS script for a custom test step
+const response = context.getPreviousResponse();
+const data = JSON.parse(response.body);
+
+if (data.status === 'SUCCESS') {
+    console.log('Previous step succeeded, proceeding...');
+    context.setVariable('next_action', 'PROCESS');
+} else {
+    console.log('Previous step failed, stopping.');
+    context.stopFlow();
+}
+
+// Return a result for this step
+({
+    status: 'SUCCESS',
+    message: 'JS execution completed'
+})
+```
+
+## Context Object
+
+The `context` object is provided to your script and includes:
+
+- `getPreviousResponse()`: Returns the result of the previous execution step.
+- `setVariable(name, value)`: Sets an environment variable for the duration of the flow.
+- `getVariable(name)`: Retrieves a variable.
+- `stopFlow()`: Aborts the current flow execution.

@@ -1,0 +1,48 @@
+---
+title: "Quickstart"
+description: "Get started with Stress Pilot in under 5 minutes."
+---
+
+This guide will help you get your first test project up and running.
+
+## Prerequisites
+
+- [Docker](https://www.docker.com/get-started) installed on your machine.
+- [Java 17](https://www.oracle.com/java/technologies/downloads/) or higher for core services.
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) for running the Super App.
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/zeann3th/StressPilot.git
+cd StressPilot
+```
+
+## 2. Start Core Services
+
+Use the provided Docker Compose (if available) or start the services individually.
+
+```bash
+# Start Plugin Service (Rust)
+cd plugin_service
+cargo run
+
+# Start Core Service (Java)
+cd ../stresspilot
+./mvnw spring-boot:run
+```
+
+## 3. Launch the Super App
+
+```bash
+cd ../stresspilot_super_app
+flutter run
+```
+
+## 4. Create Your First Project
+
+1. Open the Super App.
+2. Navigate to the **Projects** tab.
+3. Click on the **+** button to create a new project.
+4. Give it a name and description.
+5. Start adding endpoints and test flows!

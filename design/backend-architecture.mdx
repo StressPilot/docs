@@ -1,0 +1,43 @@
+---
+title: "Backend Architecture"
+description: "Detailed look at the Stress Pilot core backend."
+---
+
+The `stresspilot` backend is the central engine of the platform. Built with **Spring Boot**, it manages the execution of test projects, coordinates plugins, and serves APIs to the Super App and the Agent.
+
+## Core Design Patterns
+
+The backend follows **Clean Architecture** principles. This ensures that the business logic (`core`) is decoupled from external frameworks and delivery mechanisms (`ui`, `infrastructure`).
+
+<Steps>
+  <Step title="Core Layer">
+    Contains the domain models and use cases. This layer has no dependencies on Spring Boot or any database framework.
+  </Step>
+  <Step title="Infrastructure Layer">
+    Implements interfaces defined in the core layer. This is where database operations (`PostgreSQL`) and external integrations live.
+  </Step>
+  <Step title="UI Layer">
+    Exposes the application to the outside world. It includes both **RESTful controllers** (used by the Super App) and **gRPC endpoints** for potential high-performance integrations.
+  </Step>
+</Steps>
+
+## Key Components
+
+<AccordionGroup>
+  <Accordion title="Project Engine" icon="folder-tree">
+    Handles the creation, updates, and organization of test projects. It manages the entire lifecycle of a test configuration.
+  </Accordion>
+  <Accordion title="Execution Engine" icon="bolt">
+    Responsible for executing individual endpoints and flows. It uses a scalable **Thread Pool** (`ExecutorService`) to handle concurrent test executions for load testing.
+  </Accordion>
+  <Accordion title="Plugin Manager" icon="puzzle-piece">
+    Dynamically loads and manages custom plugins at runtime using custom `ClassLoader` mechanics. It provides an abstraction layer so the core engine can interact with any plugin via a common interface (`EndpointExecutor`).
+  </Accordion>
+  <Accordion title="Persistence Layer" icon="database">
+    Uses **PostgreSQL** to store project configurations, endpoint definitions, and test results. We utilize `Spring Data JPA` and `Hibernate` for ORM capabilities.
+  </Accordion>
+</AccordionGroup>
+
+## APIs & Communication
+
+The primary communication method with the Super App is over **HTTP REST**. While gRPC services are available in the `ui/grpc` package, the primary clients rely on the RESTful controllers located in `ui/restful`. Test results are streamed back to the client using **WebSockets**.

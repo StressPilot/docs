@@ -1,0 +1,56 @@
+---
+title: "Design Philosophy"
+description: "The architectural principles behind Stress Pilot."
+---
+
+Stress Pilot is built with a focus on **modularity**, **scalability**, and **extensibility**.
+
+## Core Principles
+
+<CardGroup cols={2}>
+  <Card title="Separation of Concerns" icon="layer-group">
+    Each component (`Core`, `UI`, `Agent`, `Plugin Service`) has a well-defined responsibility and minimal coupling.
+  </Card>
+  <Card title="Plugin-First Architecture" icon="puzzle-piece">
+    Features are built as plugins whenever possible to ensure the `stresspilot` core remains lightweight, stable, and agnostic to specific protocols.
+  </Card>
+  <Card title="Cloud-Native Design" icon="cloud">
+    All components are containerized (via `Docker`) and can be deployed easily in a Kubernetes environment for high availability.
+  </Card>
+  <Card title="AI-Augmented Testing" icon="robot">
+    Intelligence is built into the platform natively using `LangChain` and `LangGraph` to help users create better tests faster.
+  </Card>
+</CardGroup>
+
+## Backend Architecture
+
+The core backend is built using **Spring Boot** and follows **Clean Architecture** principles.
+
+*   **Core Layer**: Contains the domain models and business logic.
+*   **Infrastructure Layer**: Handles persistence (`PostgreSQL`), external API calls, and plugin class loading.
+*   **UI Layer**: Exposes **RESTful** endpoints (via `Spring Web`) for the Super App and other clients.
+
+## Super App Architecture
+
+The Super App is built with **Flutter** for a consistent cross-platform experience. It uses the **Provider** package for reactive state management and interacts with the backend via **HTTP/REST** using the `dio` client. Real-time test results are streamed via **STOMP/WebSockets**.
+
+## Plugin Service Design
+
+The Plugin Service is a **Rust** microservice optimized for high-throughput and low-latency access to plugin metadata and binary files. It uses `Axum` for routing and `Diesel` for database interactions.
+
+## Detailed Architecture
+
+<CardGroup cols={2}>
+  <Card title="Backend Architecture" icon="server" href="/design/backend-architecture">
+    Deep dive into the Spring Boot core engine.
+  </Card>
+  <Card title="App Architecture" icon="mobile" href="/design/app-architecture">
+    Understand how the Flutter Super App is built.
+  </Card>
+  <Card title="AI Agent Design" icon="robot" href="/design/agent-design">
+    Explore the Python-based intelligent orchestrator.
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/introduction">
+    Check the full API documentation.
+  </Card>
+</CardGroup>

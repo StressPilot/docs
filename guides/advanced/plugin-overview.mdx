@@ -1,0 +1,33 @@
+---
+title: "Plugin Overview"
+description: "Understand the Stress Pilot plugin architecture and how to extend it."
+---
+
+Plugins are the cornerstone of Stress Pilot's extensibility. They allow you to add support for new protocols, custom validation logic, or integration with external tools.
+
+## Why Plugins?
+
+- **Protocol Support**: Out of the box, Stress Pilot supports HTTP. Use plugins for gRPC, ISO8583, or custom proprietary protocols.
+- **Custom Execution**: Need to run a script between test steps? Create a plugin to execute JavaScript or Python scripts.
+- **Enhanced Validation**: Beyond simple status code checks, use plugins for deep response validation (e.g., checking values in a database).
+
+## Plugin Architecture
+
+A Stress Pilot plugin typically consists of three main components:
+
+1. **Endpoint Validator**: Responsible for validating the configuration of an endpoint before it is executed.
+2. **Endpoint Executor**: The core component that handles the actual execution of the endpoint (e.g., making a network request).
+3. **Flow Executor** (Optional): Manages the execution logic for a sequence of endpoints within a flow.
+
+## How it works
+
+When you define an endpoint in the Super App, you select the appropriate plugin for that endpoint. The Stress Pilot core engine then delegates the execution and validation of that endpoint to the selected plugin.
+
+<CardGroup cols={2}>
+  <Card title="Creating a Plugin" icon="plus" href="/guides/advanced/creating-a-plugin">
+    Learn how to build your first plugin from scratch.
+  </Card>
+  <Card title="JavaScript Example" icon="js" href="/guides/advanced/javascript-plugin-example">
+    See how to implement custom logic using JavaScript.
+  </Card>
+</CardGroup>

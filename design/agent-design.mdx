@@ -1,0 +1,47 @@
+---
+title: "AI Agent Design"
+description: "How the Stress Pilot AI agent is built."
+---
+
+The `stresspilot_agent` is a Python-based intelligent orchestrator. It acts as an expert assistant, helping users automate testing workflows, analyze errors, and generate complex test scenarios using Natural Language.
+
+## Technology Stack
+
+The agent is built on a modern AI stack leveraging Python 3.13+.
+
+<CardGroup cols={2}>
+  <Card title="LangChain" icon="link">
+    Provides the core LLM application logic. We use `langchain` to manage prompts, parse outputs, and interact with various LLM providers (Google GenAI, OpenAI, Anthropic, Ollama).
+  </Card>
+  <Card title="LangGraph" icon="diagram-project">
+    Manages complex, stateful AI workflows. `langgraph` allows us to define the agent's behavior as a directed graph, enabling cyclic reasoning and state checkpoints via `langgraph-checkpoint-sqlite`.
+  </Card>
+  <Card title="Rich & Questionary" icon="terminal">
+    Power the interactive CLI experience. `rich` provides beautiful terminal formatting (tables, progress bars), while `questionary` handles user prompts.
+  </Card>
+  <Card title="Pydantic Settings" icon="shield-check">
+    Ensures robust configuration management and data validation for environment variables and LLM responses.
+  </Card>
+</CardGroup>
+
+## Core Capabilities
+
+<Steps>
+  <Step title="Natural Language to Test Flow">
+    Describe your test scenario in plain English (e.g., "Create a login flow and then fetch the user profile"). The agent parses this intent and generates the corresponding `stresspilot` project and flow objects.
+  </Step>
+  <Step title="Intelligent Error Analysis">
+    When a test fails, the agent can analyze the execution context, response body, and headers to suggest potential root causes or actionable fixes.
+  </Step>
+  <Step title="Tool Execution">
+    The agent utilizes a `tools` architecture (located in `src/tools/`) to interact directly with the `stresspilot` core backend via **HTTP REST** requests using the `httpx` package.
+  </Step>
+</Steps>
+
+## Agent Architecture Pattern
+
+The agent follows an **Actor-Observer** or **ReAct** (Reason + Act) pattern implemented via LangGraph. 
+
+1. **State**: The agent maintains a `State` object containing the conversation history and current context.
+2. **Nodes**: Different Python functions act as graph nodes (e.g., `llm_node`, `tool_execution_node`).
+3. **Edges**: Conditional logic determines the flow. If the LLM decides to call a tool, the graph routes to the tool executor, then loops back to the LLM to evaluate the result.

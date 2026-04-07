@@ -15,17 +15,99 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": ["/guides/installation", "/guides/quickstart"]
+            "pages": [
+              "/guides/introduction",
+              "/guides/quickstart",
+              "/guides/installation"
+            ]
+          },
+          {
+            "group": "User Guides",
+            "pages": [
+              "/guides/user/overview",
+              "/guides/user/projects",
+              "/guides/user/endpoints",
+              "/guides/user/flows",
+              "/guides/user/marketplace"
+            ]
+          },
+          {
+            "group": "Advanced Guides",
+            "pages": [
+              "/guides/advanced/plugin-overview",
+              "/guides/advanced/creating-a-plugin",
+              "/guides/advanced/javascript-plugin-example"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "System Design",
+        "groups": [
+          {
+            "group": "Architecture",
+            "pages": [
+              "/design/philosophy",
+              "/design/backend-architecture",
+              "/design/app-architecture",
+              "/design/agent-design"
+            ]
           }
         ]
       },
       {
         "tab": "API Reference",
-        "pages": []
-      },
-      {
-        "tab": "System Design",
-        "pages": []
+        "groups": [
+          {
+            "group": "Core API",
+            "pages": [
+              "/api-reference/introduction",
+              "/api-reference/endpoint/get-list-projects",
+              "/api-reference/endpoint/create-project",
+              "/api-reference/endpoint/import-project",
+              "/api-reference/endpoint/get-project-detail",
+              "/api-reference/endpoint/update-project",
+              "/api-reference/endpoint/delete-project",
+              "/api-reference/endpoint/export-project",
+              "/api-reference/endpoint/get-list-endpoint",
+              "/api-reference/endpoint/create-endpoint",
+              "/api-reference/endpoint/get-endpoint-detail",
+              "/api-reference/endpoint/update-endpoint",
+              "/api-reference/endpoint/delete-endpoint",
+              "/api-reference/endpoint/execute-endpoint",
+              "/api-reference/endpoint/execute-adhoc-endpoint",
+              "/api-reference/endpoint/upload-endpoints",
+              "/api-reference/endpoint/get-list-flow",
+              "/api-reference/endpoint/create-flow",
+              "/api-reference/endpoint/get-flow-detail",
+              "/api-reference/endpoint/update-flow",
+              "/api-reference/endpoint/delete-flow",
+              "/api-reference/endpoint/run-flow",
+              "/api-reference/endpoint/configure-flow",
+              "/api-reference/endpoint/get-environment-variables",
+              "/api-reference/endpoint/update-environment-variables",
+              "/api-reference/endpoint/list-plugins",
+              "/api-reference/endpoint/reload-plugin",
+              "/api-reference/endpoint/reload-all-plugins",
+              "/api-reference/endpoint/get-all-configs",
+              "/api-reference/endpoint/get-config-value",
+              "/api-reference/endpoint/set-config-value",
+              "/api-reference/endpoint/get-session",
+              "/api-reference/endpoint/get-capabilities",
+              "/api-reference/endpoint/get-all-runs",
+              "/api-reference/endpoint/get-run-detail",
+              "/api-reference/endpoint/get-last-run",
+              "/api-reference/endpoint/export-run",
+              "/api-reference/endpoint/interrupt-run"
+            ]
+          },
+          {
+            "group": "Plugin Service",
+            "pages": [
+              "/api-reference/plugin-service/overview"
+            ]
+          }
+        ]
       }
     ],
     "global": {
@@ -41,6 +123,9 @@
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
+  },
+  "api": {
+    "baseUrl": "http://localhost:52000"
   },
   "navbar": {
     "links": [

@@ -1,0 +1,49 @@
+---
+title: "User Guide Overview"
+description: "An overview of the Stress Pilot Super App and its features."
+---
+
+The Stress Pilot Super App is your central dashboard for managing all testing activities. It provides a clean, intuitive interface for managing projects, endpoints, environments, and analyzing test results.
+
+## Navigation
+
+The app is divided into several key sections:
+
+- **Dashboard**: A high-level overview of your recent activities and system health.
+- **Projects**: Manage your test projects and organization.
+- **Endpoints**: Define and configure the APIs you want to test.
+- **Flows**: Orchestrate complex test scenarios with multiple steps.
+- **Marketplace**: Explore, download, and manage plugins to extend your testing capabilities.
+- **Results**: View detailed reports and logs of your test runs.
+- **Agent**: Interact with the AI agent for automated test generation.
+
+## Key Concepts
+
+### Projects
+A project is a logical grouping of endpoints, flows, and environment variables. Most users create a project for each application or microservice they are testing.
+
+### Endpoints
+An endpoint represents a specific API call. It includes the method (GET, POST, etc.), URL, headers, and body. Endpoints can be associated with different plugins to handle various protocols (HTTP, gRPC, ISO8583).
+
+### Flows
+A flow is a sequence of endpoint executions. Flows allow you to model real-world user behavior, such as logging in, searching for a product, and then checking out.
+
+### Marketplace
+The marketplace is where you find plugins that add new capabilities to Stress Pilot. For example, the **Playwright Plugin** allows you to perform browser-based testing, while the **ISO8583 Plugin** enables testing of financial message protocols.
+
+## Explore the User Guides
+
+<CardGroup cols={2}>
+  <Card title="Project Management" icon="folder-tree" href="/guides/user/projects">
+    Learn how to organize your tests into projects.
+  </Card>
+  <Card title="Defining Endpoints" icon="terminal" href="/guides/user/endpoints">
+    Configure HTTP, gRPC, and custom protocol endpoints.
+  </Card>
+  <Card title="Creating Test Flows" icon="diagram-project" href="/guides/user/flows">
+    Chain endpoints together into complex test scenarios.
+  </Card>
+  <Card title="Plugin Marketplace" icon="shop" href="/guides/user/marketplace">
+    Discover and install plugins to extend your capabilities.
+  </Card>
+</CardGroup>

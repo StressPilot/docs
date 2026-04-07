@@ -1,0 +1,73 @@
+---
+title: "Creating a Plugin"
+description: "Step-by-step guide to creating a custom plugin for Stress Pilot."
+---
+
+Creating a plugin for Stress Pilot involves implementing a set of Java interfaces.
+
+## 1. Set Up Your Maven Project
+
+Create a new Maven project and add the `stresspilot-core` dependency (or link it as a module).
+
+```xml
+<dependency>
+    <groupId>dev.zeann3th</groupId>
+    <artifactId>stresspilot-core</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
+
+## 2. Implement the Endpoint Executor
+
+The `EndpointExecutor` is responsible for performing the actual test operation.
+
+```java
+public class MyCustomExecutor implements EndpointExecutor {
+    @Override
+    public ExecutionResult execute(Endpoint endpoint, Environment environment) {
+        // Implement your execution logic here
+        // e.g., send a custom network message
+        return ExecutionResult.builder()
+                .status(ExecutionStatus.SUCCESS)
+                .responseBody("Execution completed successfully")
+                .build();
+    }
+}
+```
+
+## 3. Implement the Endpoint Validator
+
+The `EndpointValidator` ensures that the endpoint configuration is valid.
+
+```java
+public class MyCustomValidator implements EndpointValidator {
+    @Override
+    public ValidationResult validate(Endpoint endpoint) {
+        if (endpoint.getUrl() == null || endpoint.getUrl().isEmpty()) {
+            return ValidationResult.error("URL must not be empty");
+        }
+        return ValidationResult.success();
+    }
+}
+```
+
+## 4. Register Your Plugin
+
+Currently, plugins are registered via the `PluginService`. You need to package your plugin as a JAR and upload it to the marketplace or add it to the classpath of the `stresspilot` core.
+
+## Example: JavaScript Plugin
+
+The JavaScript plugin allows you to execute custom JS code as part of your test.
+
+```java
+public class JsEndpointExecutor implements EndpointExecutor {
+    @Override
+    public ExecutionResult execute(Endpoint endpoint, Environment environment) {
+        String script = endpoint.getConfig().get("script");
+        // Use GraalVM or similar to execute the script
+        return ExecutionResult.builder()
+                .status(ExecutionStatus.SUCCESS)
+                .build();
+    }
+}
+```

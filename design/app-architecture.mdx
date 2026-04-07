@@ -1,0 +1,62 @@
+---
+title: "Super App Architecture"
+description: "Technical details of the Flutter Super App."
+---
+
+The Stress Pilot Super App is a high-performance cross-platform application built with **Flutter**. It acts as the central dashboard for managing test projects, configuring endpoints, and viewing test results.
+
+## State Management
+
+We use the **Provider** package for simple and efficient state management across the application. This ensures that our UI remains reactive and updates automatically when the underlying data changes.
+
+<Accordion title="Why Provider?">
+  `provider` allows us to inject state objects (ChangeNotifiers) into the widget tree, making it easy to manage both local and global application states. It is a lightweight and flexible alternative to more complex patterns like BLoC.
+</Accordion>
+
+## Dependency Injection (DI)
+
+To keep our code decoupled and testable, we use a service locator pattern for Dependency Injection.
+
+<Steps>
+  <Step title="GetIt Service Locator">
+    The `get_it` package acts as our central service locator. It provides global access to singleton instances of our repositories, services, and state objects.
+  </Step>
+  <Step title="Injectable & Build Runner">
+    We use the `injectable` package to automatically generate the DI configuration. By using annotations like `@lazySingleton` or `@injectable`, we ensure that our dependencies are correctly registered during the build process via `build_runner`.
+  </Step>
+</Steps>
+
+## Communication & Networking
+
+The Super App communicates with the `stresspilot` backend using **RESTful APIs** over HTTP.
+
+<Steps>
+  <Step title="HTTP Client">
+    We utilize the `dio` package for all HTTP requests. It features interceptors for authentication and logging, which can be found in `core/network/http_client.dart`.
+  </Step>
+  <Step title="Real-time Updates">
+    For real-time test execution monitoring, the app uses **WebSockets** (via the `stomp_dart_client` and `web_socket_channel` packages) to stream results directly to the dashboard.
+  </Step>
+</Steps>
+
+## Key Features Architecture
+
+Our application is built with a feature-based folder structure following **Clean Architecture** principles.
+
+<CardGroup cols={2}>
+  <Card title="Modular Features" icon="boxes-stacked">
+    Each feature (`projects`, `endpoints`, `results`) is self-contained with its own data models, repositories, and presentation logic.
+  </Card>
+  <Card title="Dynamic UI Generation" icon="wand-magic-sparkles">
+    The UI for configuring endpoints is built dynamically using the `shadcn_ui` component library, allowing us to render different input fields based on the selected plugin type.
+  </Card>
+</CardGroup>
+
+## Core Packages Used
+
+*   `dio`: For robust HTTP networking.
+*   `provider`: For reactive state management.
+*   `get_it` & `injectable`: For Dependency Injection.
+*   `shadcn_ui`: For a modern and consistent UI component library.
+*   `stomp_dart_client`: For real-time communication via STOMP/WebSockets.
+
